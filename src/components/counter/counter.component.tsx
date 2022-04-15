@@ -18,8 +18,7 @@ export default function Counter(): JSX.Element {
   const incrementValue = Number(incrementAmount) || 0;
 
   return (
-    <div>
-      <CounterRow>
+    <div><CounterRow>
         <Button aria-label="Decrement value" onClick={() => dispatch(decrement())}>
           -
         </Button>
