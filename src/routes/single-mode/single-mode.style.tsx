@@ -81,6 +81,6 @@ export const PomoCompleteButton = styled.div`
   }
 
   &:active {
-    background-image: url('images/pomo_complete_button_active.png');
+    background-image: url('/images/pomo_complete_button_active.png');
   }
 `;

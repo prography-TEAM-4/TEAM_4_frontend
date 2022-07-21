@@ -38,28 +38,28 @@ export const NavBox = styled.div`
 `;
 
 export const NavImg = styled.div<{ content: string }>`
-  background-image: url('images/mypage.png');
+  background-image: url('/images/mypage.png');
   background-size: cover;
   width: 45px;
   height: 45px;
   cursor: pointer;
 
   &:hover {
-    background-image: url('images/mypage_hover.png');
+    background-image: url('/images/mypage_hover.png');
   }
   &:active {
-    background-image: url('images/mypage_active.png');
+    background-image: url('/images/mypage_active.png');
   }
 
   ${({ content }) =>
     content === 'info' &&
     css`
-      background-image: url('images/info.png');
+      background-image: url('/images/info.png');
       &:hover {
-        background-image: url('images/info_hover.png');
+        background-image: url('/images/info_hover.png');
       }
       &:active {
-        background-image: url($'images/info_active.png');
+        background-image: url($'/images/info_active.png');
       }
     `}
 `;

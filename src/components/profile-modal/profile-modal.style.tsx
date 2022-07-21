@@ -101,7 +101,7 @@ export const LogoutButtonContainer = styled.div`
 `;
 
 export const LogoutButton = styled.div`
-  background-image: url('images/logout_button.png');
+  background-image: url('/images/logout_button.png');
   background-size: cover;
   background-repeat: no-repeat;
   width: 260px;
@@ -109,10 +109,10 @@ export const LogoutButton = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-image: url('images/logout_hover_button.png');
+    background-image: url('/images/logout_hover_button.png');
   }
 
   &:active {
-    background-image: url('images/logout_active_button.png');
+    background-image: url('/images/logout_active_button.png');
   }
 `;

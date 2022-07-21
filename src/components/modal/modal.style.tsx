@@ -48,7 +48,7 @@ export const ModalBody = styled.div`
 `;
 
 export const CloseButton = styled.div`
-  background-image: url('images/close.png');
+  background-image: url('/images/close.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 48px;
@@ -60,6 +60,6 @@ export const CloseButton = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-image: url('images/close_hover.png');
+    background-image: url('/images/close_hover.png');
   }
 `;
