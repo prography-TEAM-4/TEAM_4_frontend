@@ -96,16 +96,20 @@ export default function MultiMode(): JSX.Element {
       // alert(socketClient.current?.connected);
     });
     socketClient.current.on('customError', (value) => {
-      alert(value);
+      if (!finish) {
+        alert(value);
+      }
     });
     socketClient.current?.emit('init', { Nick: nickName, all: imgCodeAll });
     socketClient.current.on('init', (data) => {
       setMembers(data);
     });
     socketClient.current?.on('leave', (data) => {
-      setMembers(data);
+      if (!finish) {
+        setMembers(data);
+      }
     });
-  }, [imgCodeAll, nickName, roomIdParam]);
+  }, [imgCodeAll, nickName, roomIdParam, finish]);
   useEffect(() => {
     if (nickName === '') getNickname();
     // eslint-disable-next-line react-hooks/exhaustive-deps

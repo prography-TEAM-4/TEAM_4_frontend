@@ -14,12 +14,15 @@ import { timerAction } from '../../store/modules/timer/timer.slice';
 import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
 import { PomodoroTimerTypes } from '../../store/modules/timer/timer.type';
 
-const formatCount = (timerCount: number): number[] => [
-  Math.floor(timerCount / 60 / 10),
-  Math.floor(timerCount / 60) % 10,
-  Math.floor((timerCount % 60) / 10),
-  timerCount % 10,
-];
+const formatCount = (timerCount: number): number[] => {
+  if (timerCount < 0) return [0, 0, 0, 0];
+  return [
+    Math.floor(timerCount / 60 / 10),
+    Math.floor(timerCount / 60) % 10,
+    Math.floor((timerCount % 60) / 10),
+    timerCount % 10,
+  ];
+};
 
 const calNextPomoType = (currentPomoType: PomodoroTimerTypes) => {
   if (currentPomoType === PomodoroTimerTypes.short_pomo) {
