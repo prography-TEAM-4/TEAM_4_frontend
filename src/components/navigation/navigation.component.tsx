@@ -44,7 +44,7 @@ export default function Navigation(): JSX.Element {
   };
 
   useEffect(() => {
-    if (location.pathname.split('/')[1] === 'multi') setIsMultiPage(true);
+    if (location.pathname.includes('multi')) setIsMultiPage(true);
     else setIsMultiPage(false);
   }, [location]);
 
