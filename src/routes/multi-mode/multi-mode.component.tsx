@@ -39,7 +39,6 @@ export default function MultiMode(): JSX.Element {
   const { roomIdParam } = useParams();
   const [imageUrl, setImageUrl] = useState<string>('');
   const socketClient = useRef<Socket>();
-  const finish = useAppSelector(selectTimerFinish);
   const nickName = useAppSelector(selectNickname);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
   const cycleCount = useAppSelector(selectTimerCycle);
@@ -58,6 +57,12 @@ export default function MultiMode(): JSX.Element {
 
     return () => clearInterval(characterMovingTimer);
   }, []);
+  useEffect(() => {
+    let localRef: any = { disconnect: () => {} };
+    if (socketClient.current) localRef = socketClient.current;
+    return () => localRef.disconnect();
+  }, []);
+
   useEffect(() => {
     return () => {
       if (socketClient.current?.connected) {
@@ -96,20 +101,25 @@ export default function MultiMode(): JSX.Element {
       // alert(socketClient.current?.connected);
     });
     socketClient.current.on('customError', (value) => {
-      if (!finish) {
+      if (!isFinished) {
         alert(value);
       }
     });
     socketClient.current?.emit('init', { Nick: nickName, all: imgCodeAll });
     socketClient.current.on('init', (data) => {
-      setMembers(data);
-    });
-    socketClient.current?.on('leave', (data) => {
-      if (!finish) {
+      if (!isFinished) {
+        console.log('initSet');
         setMembers(data);
       }
     });
-  }, [imgCodeAll, nickName, roomIdParam, finish]);
+    socketClient.current?.on('leave', (data) => {
+      if (!isFinished) {
+        console.log(isFinished);
+        console.log('leaveSet');
+        setMembers(data);
+      }
+    });
+  }, [imgCodeAll, nickName, roomIdParam, isFinished]);
   useEffect(() => {
     if (nickName === '') getNickname();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -140,7 +150,7 @@ export default function MultiMode(): JSX.Element {
   };
 
   useEffect(() => {
-    if (!finish) {
+    if (!isFinished) {
       return;
     }
     const getImageUrl = async () => {
@@ -154,7 +164,7 @@ export default function MultiMode(): JSX.Element {
         });
     };
     getImageUrl();
-  }, [finish, members, setImageUrl, dispatch]);
+  }, [isFinished, members, setImageUrl, dispatch]);
 
   const [toastState, setToastState] = useState<boolean>(false);
   ToastHook(toastState, setToastState);

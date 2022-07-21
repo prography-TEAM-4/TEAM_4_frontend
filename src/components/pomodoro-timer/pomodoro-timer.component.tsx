@@ -58,9 +58,6 @@ export default function PomodoroTimer({ client }: Props) {
   const intervalCallback = () => {
     if (count === 0) {
       if (pomoCycle === 4) {
-        if (pomoMode === 'multi') {
-          client?.disconnect();
-        }
         dispatch(timerAction.finishTimer());
       } else {
         const pomo = calNextPomoType(pomoType);
