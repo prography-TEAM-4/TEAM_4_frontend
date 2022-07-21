@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
-export const PomodoroTimerContainer = styled.div`
-  background-image: url(${process.env.REACT_APP_IMG_URL}/timer/watch_day.png);
+export const PomodoroTimerContainer = styled.div<{ pomoType: string }>`
+  background-image:
+  ${({ pomoType }) =>
+    pomoType.includes('break')
+      ? `url(${process.env.REACT_APP_IMG_URL}/timer/watch_night.png);`
+      : `url(${process.env.REACT_APP_IMG_URL}/timer/watch_day.png);`}
+  
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

@@ -90,13 +90,9 @@ export default function Main(): JSX.Element {
           hoverImg="/images/multi_mode_button_hover.png"
           activeImg="/images/multi_mode_button_active.png"
           onClick={handleFriendClick}
-        >
-          <ModeSelectButtonText className="friend">친구랑하기</ModeSelectButtonText>
-        </ModeSelectButton>
+        />
       </ModeSelectButtonContainer>
-      <PomoGuideButtonContainer onClick={handleExplainModalClick}>
-        <PomoGuideButtonText>뽀모도로란?</PomoGuideButtonText>
-      </PomoGuideButtonContainer>
+      <PomoGuideButtonContainer onClick={handleExplainModalClick} />
       <SingleModeSelectModal />
       <MultiModeSelectModal />
       <ExplainModal />

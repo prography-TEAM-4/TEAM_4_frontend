@@ -8,7 +8,6 @@ export const ExitModalContainer = styled.div`
   background-color: #fbffd1;
   padding: 24px 20px;
   box-sizing: border-box;
-
   opacity: 0;
   transition: all 0.3s ease-in-out;
   pointer-events: none;

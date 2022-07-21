@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
-import { selectPomodoroTimerType, selectTimerCycle, selectTimerFinish } from '../../store/modules/timer/timer.select';
+import {
+  selectPomodoroTimerType,
+  selectTimerCycle,
+  selectTimerFinish,
+  selectTimerMode,
+} from '../../store/modules/timer/timer.select';
 import useRandomCharacter from '../../hooks/useRandomCharacter';
 
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
@@ -27,6 +32,7 @@ export default function SingleMode(): JSX.Element {
   const pomoTimerType = useAppSelector(selectPomodoroTimerType);
   const pomoCycle = useAppSelector(selectTimerCycle);
   const isFinished = useAppSelector(selectTimerFinish);
+  const timerMode = useAppSelector(selectTimerMode);
 
   const [characterMoving, setCharacterMoving] = useState(false);
 
@@ -62,13 +68,12 @@ export default function SingleMode(): JSX.Element {
   }, [pomoCycle, isFinished, dispatch]);
 
   const stateMessage = () => {
-    if (pomoTimerType === 'break') {
-      return '5분 휴식합니다.';
+    if (timerMode === 'single') {
+      if (pomoTimerType === 'break') return '5분 휴식합니다.';
+      if (pomoTimerType === 'long_break') return '10분 휴식합니다.';
+      if (isFinished && pomoCycle === 4) return '뽀모 성공 :)';
     }
-    if (pomoTimerType === 'long_break') {
-      return '10분 휴식합니다.';
-    }
-    return '내 새끼 밥주는 중...';
+    return '집중하는 중...';
   };
 
   const characterState = () => {

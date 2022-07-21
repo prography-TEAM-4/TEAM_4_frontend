@@ -4,20 +4,6 @@ export const LinkContainer = styled.div`
   display: flex;
 `;
 
-export const CopyBtn = styled.button`
-  width: 66px;
-  height: 48px;
-  background-color: #000;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  line-height: 26px;
-  color: #fff;
-  border-radius: 10px;
-  font-weight: 700;
-  padding: 0;
-`;
-
 export const LinkAddressContainer = styled.div`
   padding: 0 1.3em;
   height: 46px;
@@ -30,4 +16,18 @@ export const LinkAddressContainer = styled.div`
 export const LinkAddress = styled.span`
   font-size: 14px;
   line-height: 46px;
+`;
+
+export const CopyBtn = styled.button`
+  width: 66px;
+  height: 48px;
+  background-color: #000;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 26px;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0;
+  font-family: 'neodgm';
 `;

@@ -100,7 +100,7 @@ export default function PomodoroTimer({ client }: Props) {
   const timerDigits: number[] = formatCount(count);
 
   return (
-    <PomodoroTimerContainer>
+    <PomodoroTimerContainer pomoType={pomoType}>
       <TimerTextContainer>
         <TimerText>{timerDigits[0]}</TimerText>
         <TimerText>{timerDigits[1]}</TimerText>

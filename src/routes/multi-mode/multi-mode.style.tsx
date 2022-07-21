@@ -39,9 +39,9 @@ const topPosition = (position: number) => {
 const leftPosition = (position: number) => {
   switch (position) {
     case 1:
-      return '25%';
+      return '21%';
     case 2:
-      return '65%';
+      return '69%';
     case 3:
       return '15%';
     case 4:
@@ -63,7 +63,7 @@ export const ChracterPosition = styled.div<{ positionNum: number }>`
 
 export const ButtonContainer = styled.div`
   position: absolute;
-  bottom: 26%;
+  bottom: 20%;
   left: 50%;
   transform: translate(-50%, 0);
 `;
@@ -96,18 +96,21 @@ export const StartButton = styled.div`
   }
 `;
 
-export const GuidanceText = styled(ButtonContainer)`
-  bottom: 20%;
+export const GuidanceText = styled.div`
+  text-align: center;
 `;
 
 export const LinkContainer = styled(ButtonContainer)`
-  bottom: 14%;
+  bottom: 10%;
 `;
 
 export const CopyMsgContainer = styled(ButtonContainer)`
   bottom: 7%;
 `;
 
-export const StateBarContainer = styled(ButtonContainer)`
-  bottom: 17%;
+export const StateBarContainer = styled.div`
+  position: absolute;
+  top: calc(8%);
+  left: 50%;
+  transform: translate(-50%, 0);
 `;

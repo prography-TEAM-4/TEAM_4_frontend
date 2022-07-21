@@ -95,7 +95,7 @@ export const PomoGuideButtonText = styled.span`
 `;
 
 export const PomoGuideButtonContainer = styled.div`
-  background-image: url('images/pomoguide_button.png');
+  background-image: url('/images/pomoguide_button.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 180px;
@@ -107,14 +107,14 @@ export const PomoGuideButtonContainer = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-image: url('images/pomoguide_button_hover.png');
+    background-image: url('/images/pomoguide_button_hover.png');
     ${PomoGuideButtonText} {
       display: none;
     }
   }
 
   &:active {
-    background-image: url('images/pomoguide_button_active.png');
+    background-image: url('/images/pomoguide_button_active.png');
     ${PomoGuideButtonText} {
       display: none;
     }

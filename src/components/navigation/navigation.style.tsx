@@ -93,4 +93,5 @@ export const ExitModalContainer = styled.div`
   position: absolute;
   top: 110px;
   left: 40px;
+  z-index: 100;
 `;

@@ -1,4 +1,5 @@
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import {
   NavigationContainer,
   LogoContainer,
@@ -20,10 +21,14 @@ import { selectTimerStart, selectTimerFinish } from '../../store/modules/timer/t
 
 export default function Navigation(): JSX.Element {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const isGuideModalOpen = useAppSelector(selectIsGuideModalOpen);
   const isTimerStarted = useAppSelector(selectTimerStart);
   const isTimerFinished = useAppSelector(selectTimerFinish);
+
+  const [isMultiPage, setIsMultiPage] = useState(false);
 
   const handleProfileModal = () => {
     dispatch(modalAction.radioProfileModal());
@@ -35,7 +40,13 @@ export default function Navigation(): JSX.Element {
 
   const handleExitModalClick = () => {
     if (isTimerStarted || isTimerFinished) dispatch(modalAction.radioExitModal());
+    if (isMultiPage && !isTimerStarted && !isTimerFinished) navigate('/');
   };
+
+  useEffect(() => {
+    if (location.pathname.split('/')[1] === 'multi') setIsMultiPage(true);
+    else setIsMultiPage(false);
+  }, [location]);
 
   return (
     <>

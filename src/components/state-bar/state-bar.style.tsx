@@ -1,23 +1,19 @@
 import styled from 'styled-components';
 
-export const StateBarContainer = styled.span`
-  padding: 20px 55px;
-  border: 3px solid #000;
-  border-radius: 50px;
-  display: inline-block;
-  background-color: #ffd500;
-  font-family: 'IBMPlexMono';
-  font-weight: 600;
-  font-size: 20px;
+export const StateBarContainer = styled.div`
+  background-image: url(/images/alert.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 474px;
+  height: 120px;
+`;
 
-  animation: fadein 1s;
-
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+export const Text = styled.div`
+  font-size: 22px;
+  font-family: 'neodgm';
+  color: #70ff64;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
 `;

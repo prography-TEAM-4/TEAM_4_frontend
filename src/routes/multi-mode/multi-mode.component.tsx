@@ -12,6 +12,7 @@ import {
   GuidanceText,
   CopyMsgContainer,
   ChracterPosition,
+  StateBarContainer,
 } from './multi-mode.style';
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
 import MultiLink from '../../components/multi-link/multi-link.component';
@@ -20,11 +21,13 @@ import CopyMsg from '../../components/copy-message/copy-message.component';
 import Chat from '../../components/chat/chat.component';
 import { mainAction } from '../../store/modules/main/main.slice';
 import Character from '../../components/character/character.component';
+import StateBar from '../../components/state-bar/state-bar.component';
 import {
   selectPomodoroTimerType,
   selectTimerCycle,
   selectTimerFinish,
   selectTimerStart,
+  selectTimerMode,
 } from '../../store/modules/timer/timer.select';
 import { Container, PomoCompleteButton } from '../single-mode/single-mode.style';
 import { modalAction } from '../../store/modules/modal/modal.slice';
@@ -38,12 +41,16 @@ export default function MultiMode(): JSX.Element {
   const socketClient = useRef<Socket>();
   const finish = useAppSelector(selectTimerFinish);
   const nickName = useAppSelector(selectNickname);
-  const [characterMoving, setCharacterMoving] = useState<number>(1);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
   const cycleCount = useAppSelector(selectTimerCycle);
+  const timerMode = useAppSelector(selectTimerMode);
   const start = useAppSelector(selectTimerStart);
-  const [connect, setConnect] = useState<boolean>(false);
+  const pomoCycle = useAppSelector(selectTimerCycle);
+  const isFinished = useAppSelector(selectTimerFinish);
   const pomoTimerType = useAppSelector(selectPomodoroTimerType);
+  const [characterMoving, setCharacterMoving] = useState<number>(1);
+  const [connect, setConnect] = useState<boolean>(false);
+
   const [roomId, setRoomId] = useState<string>('');
   const [members, setMembers] = useState<any[]>([]);
   useEffect(() => {
@@ -147,6 +154,16 @@ export default function MultiMode(): JSX.Element {
 
   const [toastState, setToastState] = useState<boolean>(false);
   ToastHook(toastState, setToastState);
+
+  const stateMessage = () => {
+    if (timerMode === 'multi') {
+      if (pomoTimerType === 'break') return '5분 휴식시간! 이야기를 나눠보세요.';
+      if (isFinished && pomoCycle === 4) return '모두 수고하셨습니다 :)';
+    }
+    if (!start && !isFinished) return '친구 기다리는 중...';
+    return '집중하는 중...';
+  };
+
   return (
     <Container pomoState={pomoTimerType}>
       {nickName === '' && <div>hello</div>}
@@ -176,21 +193,23 @@ export default function MultiMode(): JSX.Element {
 
       {imageUrl !== '' && <PomoCompleteButton onClick={handleResultModal}>뽀모 완성!</PomoCompleteButton>}
 
-      {!start && cycleCount === 1 && <GuidanceText>링크를 보내 친구들과 함꼐하자!</GuidanceText>}
       {!start && cycleCount === 1 && (
         <LinkContainer>
+          <GuidanceText>링크를 보내 친구들과 함께하자!</GuidanceText>
           <MultiLink setToastState={setToastState}>{`${window.location.origin}/multi/${roomId}`}</MultiLink>
         </LinkContainer>
       )}
+
       {pomoTimerType.includes('break') && <Chat socketClient={socketClient.current as Socket} />}
       {toastState && (
         <CopyMsgContainer>
           <CopyMsg />
         </CopyMsgContainer>
       )}
-      {/* <StateBarContainer>
-        <StateBar>집중하는 중...</StateBar>
-      </StateBarContainer> */}
+
+      <StateBarContainer>
+        <StateBar>{stateMessage()}</StateBar>
+      </StateBarContainer>
       <ResultModal characterImage={imageUrl} />
     </Container>
   );

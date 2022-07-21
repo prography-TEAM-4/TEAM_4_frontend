@@ -35,7 +35,7 @@ export const CharacterContainer = styled.div`
 
 export const StateBarContainer = styled.div`
   position: absolute;
-  top: calc(50% + 15vw);
+  top: calc(8%);
   left: 50%;
   transform: translate(-50%, 0);
 `;
